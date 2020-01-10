@@ -26,4 +26,4 @@ export const localisation = {
 };
 
 export const API_TOKEN =
-  "5e1674428b2345000b592097|ed64163b5a1a240550d1fd7fa1aa4a63";
+  "5e1674428b2345000b592097|e63d8d4f2f611f83a08857b2d219cbee";
