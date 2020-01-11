@@ -1,5 +1,11 @@
 import React, { useContext } from "react";
 import Context from "../context";
+import styled from "styled-components";
+
+const GridItem = styled.div`
+  background-color: yellow;
+  grid-area: data;
+`;
 
 function Temperature() {
   const {
@@ -7,7 +13,7 @@ function Temperature() {
   } = useContext(Context);
 
   return (
-    <div>
+    <GridItem>
       <h1>temperature component</h1>
 
       <h2>Temperature</h2>
@@ -16,7 +22,7 @@ function Temperature() {
 
       <h2>Humidity</h2>
       {load ? "waiting for humidity" : error ? error : humidity}
-    </div>
+    </GridItem>
   );
 }
 

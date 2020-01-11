@@ -1,9 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const GridItem = styled.div`
+  background-color: red;
+  grid-area: nav;
+`;
 
 function WeatherNav() {
   return (
-    <div>
+    <GridItem>
       <button>
         <Link to="/temperature">Temperature</Link>
       </button>
@@ -13,7 +19,7 @@ function WeatherNav() {
       <button>
         <Link to="/wind">Wind</Link>
       </button>
-    </div>
+    </GridItem>
   );
 }
 

@@ -9,9 +9,18 @@ import Rain from "./Rain";
 import Wind from "./Wind";
 import CitiesButtons from "./CitiesButtons";
 import WeatherNav from "./WeatherNav";
+import styled from "styled-components";
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    " . nav "
+    " cities data ";
+`;
 
 function Wrapper() {
-  const { state, city, setCity } = useContext(Context);
+  const { city, setCity } = useContext(Context);
 
   const URL = `https://api.netatmo.com/api/getpublicdata?lat_ne=${localisation[city].lat_ne}&lon_ne=${localisation[city].lon_ne}&lat_sw=${localisation[city].lat_sw}&lon_sw=${localisation[city].lon_sw}`;
   useFetch(URL);
@@ -21,18 +30,17 @@ function Wrapper() {
     console.log("city updated");
   };
 
-  console.log("state : ", state);
-
   return (
-    <div>
+    <GridContainer>
       <WeatherNav />
       <CitiesButtons updateCity={updateCity} />
       <Switch>
+        <Route exact path="/" component={Temperature} />
         <Route path="/temperature" component={Temperature} />
         <Route path="/rain" component={Rain} />
         <Route path="/wind" component={Wind} />
       </Switch>
-    </div>
+    </GridContainer>
   );
 }
 

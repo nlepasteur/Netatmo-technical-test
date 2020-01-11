@@ -1,8 +1,14 @@
 import React from "react";
+import styled from "styled-components";
+
+const GridItem = styled.div`
+  background-color: green;
+  grid-area: cities;
+`;
 
 function CitiesButtons({ updateCity }) {
   return (
-    <div>
+    <GridItem>
       <button onClick={updateCity} name="paris">
         Paris
       </button>
@@ -18,7 +24,7 @@ function CitiesButtons({ updateCity }) {
       <button onClick={updateCity} name="bogota">
         Bogota
       </button>
-    </div>
+    </GridItem>
   );
 }
 

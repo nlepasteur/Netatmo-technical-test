@@ -8,6 +8,8 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [city, setCity] = useState("paris");
 
+  console.log("state : ", state);
+
   return (
     <Context.Provider value={{ state, dispatch, city, setCity }}>
       <div>
