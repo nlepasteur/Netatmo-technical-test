@@ -1,6 +1,6 @@
 import React, { useReducer, useState } from "react";
 import Context from "./context";
-import FetchTest from "./components/FetchTest";
+import Wrapper from "./components/Wrapper";
 
 import { initialState, reducer } from "./state/reducer";
 
@@ -11,7 +11,7 @@ function App() {
   return (
     <Context.Provider value={{ state, dispatch, city, setCity }}>
       <div>
-        <FetchTest />
+        <Wrapper />
       </div>
     </Context.Provider>
   );

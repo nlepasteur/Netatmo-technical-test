@@ -8,9 +8,8 @@ function Temperature() {
 
   return (
     <div>
-      <h1>
-        <strong>Here is TEMPERATURE component</strong>
-      </h1>
+      <h1>temperature component</h1>
+
       <h2>Temperature</h2>
 
       {load ? "waiting for temperature" : error ? error : temperature}
