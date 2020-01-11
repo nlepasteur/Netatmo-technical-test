@@ -1,75 +1,13 @@
-import React, { useEffect, useReducer, useState } from "react";
-import { localisation, API_TOKEN } from "../normally_from_back";
-
-const initialState = {
-  temperature: "",
-  humidity: ""
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "TEMPERATURE":
-      return {
-        ...state,
-        temperature: action.measure
-      };
-    case "HUMIDITY":
-      return {
-        ...state,
-        humidity: action.measure
-      };
-    default:
-      return state;
-  }
-};
+import React, { useContext } from "react";
+import { localisation } from "../normally_from_back";
+import Context from "../context";
+import { useFetch } from "../customHooks/useFetch";
 
 function FetchTest() {
-  const [city, setCity] = useState("paris");
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const { state, city, setCity } = useContext(Context);
 
   const URL = `https://api.netatmo.com/api/getpublicdata?lat_ne=${localisation[city].lat_ne}&lon_ne=${localisation[city].lon_ne}&lat_sw=${localisation[city].lat_sw}&lon_sw=${localisation[city].lon_sw}`;
-
-  const getMeasures = (fetched, val) => {
-    const reports = fetched.body.map(obj => {
-      const measures = obj.measures;
-      const [getPropNameToAccessRes] = Object.keys(measures);
-      const res = measures[getPropNameToAccessRes].res;
-      const [getPropNameToAccessReports] = Object.keys(res);
-      const targetValue = res[getPropNameToAccessReports][val];
-      return targetValue;
-    });
-    const total = reports.reduce((acc, val) => acc + val);
-    const average = total / reports.length;
-    console.log(`${val === 0 ? "temperature" : "humidity"} : `, average);
-
-    dispatch({
-      type: val === 0 ? "TEMPERATURE" : "HUMIDITY",
-      measure: average
-    });
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await fetch(URL, {
-          headers: new Headers({
-            method: "GET",
-            Authorization: `Bearer ${API_TOKEN}`
-          })
-        });
-
-        console.log("result : ", result);
-        const json = await result.json();
-        console.log("json : ", json);
-
-        getMeasures(json, 0);
-        getMeasures(json, 1);
-      } catch (error) {
-        console.log("pas pour cette fois");
-      }
-    };
-    fetchData();
-  }, [URL]);
+  useFetch(URL);
 
   const updateCity = e => {
     setCity(e.target.name);
@@ -78,7 +16,7 @@ function FetchTest() {
 
   console.log("state : ", state);
 
-  const { temperature, humidity } = state;
+  const { load, error, temperature, humidity } = state;
 
   return (
     <div>
@@ -100,9 +38,11 @@ function FetchTest() {
 
       <div>
         <h2>Temperature</h2>
-        {temperature}
+
+        {load ? "waiting for temperature" : error ? error : temperature}
+
         <h2>Humidity</h2>
-        {humidity}
+        {load ? "waiting for humidity" : error ? error : humidity}
       </div>
     </div>
   );

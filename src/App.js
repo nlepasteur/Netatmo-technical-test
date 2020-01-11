@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useReducer, useState } from "react";
+import Context from "./context";
 import FetchTest from "./components/FetchTest";
 
-// import normally_from_back from "./normally_from_back";
+import { initialState, reducer } from "./state/reducer";
 
 function App() {
-  // console.log(normally_from_back);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [city, setCity] = useState("paris");
+
   return (
-    <div>
-      <FetchTest />
-    </div>
+    <Context.Provider value={{ state, dispatch, city, setCity }}>
+      <div>
+        <FetchTest />
+      </div>
+    </Context.Provider>
   );
 }
 
