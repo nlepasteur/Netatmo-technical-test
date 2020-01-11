@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { localisation } from "../normally_from_back";
 import Context from "../context";
 import { useFetch } from "../customHooks/useFetch";
+import Temperature from "./Temperature";
+import CitiesButtons from "./CitiesButtons";
 
 function FetchTest() {
   const { state, city, setCity } = useContext(Context);
@@ -16,11 +18,9 @@ function FetchTest() {
 
   console.log("state : ", state);
 
-  const { load, error, temperature, humidity } = state;
-
   return (
     <div>
-      <button onClick={updateCity} name="paris">
+      {/* <button onClick={updateCity} name="paris">
         Paris
       </button>
 
@@ -34,16 +34,9 @@ function FetchTest() {
 
       <button onClick={updateCity} name="bogota">
         Bogota
-      </button>
-
-      <div>
-        <h2>Temperature</h2>
-
-        {load ? "waiting for temperature" : error ? error : temperature}
-
-        <h2>Humidity</h2>
-        {load ? "waiting for humidity" : error ? error : humidity}
-      </div>
+      </button> */}
+      <CitiesButtons updateCity={updateCity} />
+      <Temperature />
     </div>
   );
 }
