@@ -2,8 +2,36 @@ import React from "react";
 import styled from "styled-components";
 
 const GridItem = styled.div`
-  background-color: green;
+  display: flex;
+  flex-direction: column;
   grid-area: cities;
+  justify-content: center;
+  background-color: white;
+
+  > .selected {
+    background-color: grey;
+  }
+
+  > button {
+    padding: 1em 0.5em;
+    text-decoration: none;
+    background-color: transparent;
+    border: 0;
+  }
+
+  @media (min-width: 656px) {
+    > button {
+      border-bottom: 1px solid black;
+    }
+
+    > button:last-child {
+      border-bottom: none;
+    }
+  }
+
+  @media (max-width: 655px) {
+    flex-direction: row;
+  }
 `;
 
 function CitiesButtons({ updateCity }) {

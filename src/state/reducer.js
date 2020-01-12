@@ -1,6 +1,6 @@
 export const initialState = {
   load: true,
-  error: "",
+  error: false,
   temperature: "",
   humidity: ""
 };
@@ -11,20 +11,20 @@ export const reducer = (state, action) => {
       return {
         ...state,
         load: false,
-        error: "",
-        temperature: action.measure
+        error: false,
+        temperature: Math.round(action.measure)
       };
     case "HUMIDITY":
       return {
         ...state,
         load: false,
-        error: "",
-        humidity: action.measure
+        error: false,
+        humidity: Math.round(action.measure)
       };
     case "FETCH_ERROR":
       return {
         ...state,
-        load: false,
+        load: true,
         error: "Something went wrong"
       };
     default:

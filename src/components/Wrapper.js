@@ -12,11 +12,27 @@ import WeatherNav from "./WeatherNav";
 import styled from "styled-components";
 
 const GridContainer = styled.div`
+  width: 80%;
+  transform: translateY(80%);
+  margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
     " . nav "
     " cities data ";
+
+  @media (max-width: 850px) {
+    width: 100%;
+  }
+
+  @media (max-width: 655px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "nav"
+      "cities"
+      "data";
+    transform: translateY(0);
+  }
 `;
 
 function Wrapper() {
@@ -28,6 +44,12 @@ function Wrapper() {
   const updateCity = e => {
     setCity(e.target.name);
     console.log("city updated");
+    const prev = document.querySelector(".selected");
+    if (prev) {
+      prev.classList.remove("selected");
+    }
+    const current = e.target;
+    current.classList.add("selected");
   };
 
   return (

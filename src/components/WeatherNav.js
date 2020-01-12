@@ -5,20 +5,30 @@ import styled from "styled-components";
 const GridItem = styled.div`
   background-color: red;
   grid-area: nav;
+  text-align: center;
+`;
+
+const Button = styled.button`
+  padding: 1em 2em;
+  text-decoration: none;
+  background-color: transparent;
+  border: 0;
 `;
 
 function WeatherNav() {
   return (
     <GridItem>
-      <button>
-        <Link to="/temperature">Temperature</Link>
-      </button>
-      <button>
-        <Link to="/rain">Rain</Link>
-      </button>
-      <button>
-        <Link to="/wind">Wind</Link>
-      </button>
+      <Link to="/temperature">
+        <Button>Temperature</Button>
+      </Link>
+
+      <Link to="/rain">
+        <Button>Rain</Button>
+      </Link>
+
+      <Link to="/wind">
+        <Button>Wind</Button>
+      </Link>
     </GridItem>
   );
 }
