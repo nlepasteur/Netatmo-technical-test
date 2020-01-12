@@ -6,10 +6,10 @@ const GridItem = styled.div`
   flex-direction: column;
   grid-area: cities;
   justify-content: center;
-  background-color: white;
+  background-color: grey;
 
   > .selected {
-    background-color: grey;
+    background: linear-gradient(to right, #ffffff, transparent);
   }
 
   > button {
@@ -40,15 +40,12 @@ function CitiesButtons({ updateCity }) {
       <button onClick={updateCity} name="paris">
         Paris
       </button>
-
       <button onClick={updateCity} name="new_york">
         New York
       </button>
-
       <button onClick={updateCity} name="berlin">
         Berlin
       </button>
-
       <button onClick={updateCity} name="bogota">
         Bogota
       </button>

@@ -1,5 +1,6 @@
 import React, { useReducer, useState } from "react";
 import Context from "./context";
+import Header from "./components/Header";
 import Wrapper from "./components/Wrapper";
 
 import { initialState, reducer } from "./state/reducer";
@@ -13,6 +14,7 @@ function App() {
   return (
     <Context.Provider value={{ state, dispatch, city, setCity }}>
       <div>
+        <Header />
         <Wrapper />
       </div>
     </Context.Provider>

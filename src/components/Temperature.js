@@ -11,15 +11,10 @@ const Table = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  > div:first-child {
-    background-color: grey;
-  }
 `;
 
 const Row = styled.div`
   display: flex;
-  justify-content: space-around;
-  padding: 1em 2em;
 `;
 
 function Temperature() {
