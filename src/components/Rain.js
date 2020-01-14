@@ -49,9 +49,11 @@ function Rain() {
               NAModule1_humidity.push(humidity);
             } else if (type === "NAModule2") {
               const windData = obj.measures[module];
-              const { gust_strength, wind_strength } = windData;
-              // NAModule2_gust_strength.push(gust_strength);
-              // NAModule2_wind_strength.push(wind_strength);
+              if (windData) {
+                const { gust_strength, wind_strength } = windData;
+                NAModule2_gust_strength.push(gust_strength);
+                NAModule2_wind_strength.push(wind_strength);
+              }
             } else if (type === "NAModule3") {
               const rainData = obj.measures[module];
 
