@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import StyledLink from "./StyledLink";
+import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,8 +15,8 @@ const GridItem = styled.div`
   text-align: center;
   align-items: stretch;
   grid-area: nav;
-  background-color: #ffffff;
   border-radius: 25px;
+  border: 1px solid #a2a7ad;
 `;
 
 const Content = styled.div`
@@ -28,12 +28,28 @@ const Content = styled.div`
 
   > div {
     margin-right: 0.5em;
+  }import React from "react";
+  import { Link } from "react-router-dom";
+  import styled from "styled-components";
+  `;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #a2a7ad;
+
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
   }
 
-    > div:last-child {
-      margin: 0;
-    }
+  &:focus,
+  &:hover {
+    color: black;
   }
+
+  border-right: 1px solid #a2a7ad;
 `;
 
 function WeatherNav() {

@@ -1,45 +1,59 @@
 import React, { useContext } from "react";
 import Context from "../context";
 import styled from "styled-components";
+import { useFetch } from "../customHooks/useFetch";
 
 const GridItem = styled.div`
-  background-color: yellow;
   grid-area: data;
+
+  > div {
+    text-align: center;
+  }
 `;
 
 const Table = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-`;
-
-const Row = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 100%;
+  align-content: stretch;
+  border-top: 1px solid #a2a7ad;
+  > div {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #a2a7ad;
+    border-left: 1px solid #a2a7ad;
+  }
 `;
 
 function Temperature() {
   const {
-    state: { load, error, temperature, humidity }
+    state: { load, error, temperature, humidity, pressure },
+    URL
   } = useContext(Context);
+
+  useFetch(URL);
 
   return (
     <GridItem>
       {error ? (
-        <div>Something went wrong</div>
+        <div>
+          <h3>Something went wrong</h3>
+        </div>
       ) : load ? (
-        <div>Loading data...</div>
+        <div>
+          <h3>Loading data...</h3>
+        </div>
       ) : (
         <Table>
-          <Row>
-            <div>Temperature</div>
-            <div>Humidity</div>
-            <div>Pressure</div>
-          </Row>
-          <Row>
-            <div>{temperature}°</div>
-            <div>{humidity}°</div>
-            <div></div>
-          </Row>
+          <div>Temperature</div>
+          <div>Humidity</div>
+          <div>Pressure</div>
+
+          <div>{temperature}°</div>
+          <div>{humidity}°</div>
+          <div>{pressure}</div>
         </Table>
       )}
     </GridItem>
@@ -47,21 +61,3 @@ function Temperature() {
 }
 
 export default Temperature;
-
-// > div {
-//   padding: 0.5em 1em;
-//   border-top: 1px solid black;
-//   border-right: 1px solid black;
-// }
-
-// > div:first-child {
-//   border-left: 1px solid black;
-// }
-
-// > div:nth-child(4) {
-//   border-left: 1px solid black;
-// }
-
-// >div: nth-last-child(-n + 3) {
-//   border-bottom: 1px solid black;
-// }

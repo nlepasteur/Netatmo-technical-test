@@ -16,12 +16,25 @@ export const useFetch = url => {
     });
     const total = reports.reduce((acc, val) => acc + val);
     const average = total / reports.length;
-    console.log(`${val === 0 ? "temperature" : "humidity"} : `, average);
 
     dispatch({
       type: val === 0 ? "TEMPERATURE" : "HUMIDITY",
       measure: average
     });
+  };
+
+  const getPressure = fetched => {
+    const reports = fetched.body.map(obj => {
+      const measures = obj.measures;
+      const [first, getPropNameToAccessRes] = Object.keys(measures);
+      const res = measures[getPropNameToAccessRes].res;
+      const [getPropNameToAccessReports] = Object.keys(res);
+      const [targetValue] = res[getPropNameToAccessReports];
+      return targetValue;
+    });
+    const total = reports.reduce((acc, val) => acc + val);
+    const average = total / reports.length;
+    dispatch({ type: "PRESSURE", measure: average });
   };
 
   useEffect(() => {
@@ -34,14 +47,14 @@ export const useFetch = url => {
           })
         });
 
-        console.log("result : ", result);
         const json = await result.json();
         console.log("json : ", json);
 
         getMeasures(json, 0);
         getMeasures(json, 1);
+        getPressure(json);
       } catch (error) {
-        console.log("pas pour cette fois");
+        console.error(error);
         dispatch({ type: "FETCH_ERROR" });
       }
     };

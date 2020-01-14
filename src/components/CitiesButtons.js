@@ -6,10 +6,16 @@ const GridItem = styled.div`
   flex-direction: column;
   grid-area: cities;
   justify-content: center;
-  background-color: grey;
+  border: 1px solid grey;
+
+  > h3 {
+    margin: 0;
+    padding: 1em 0.5em;
+    background: #a2a7ad;
+  }
 
   > .selected {
-    background: linear-gradient(to right, #ffffff, transparent);
+    border-left: 10px solid blue;
   }
 
   > button {
@@ -21,7 +27,7 @@ const GridItem = styled.div`
 
   @media (min-width: 656px) {
     > button {
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid #000000;
     }
 
     > button:last-child {
@@ -37,6 +43,7 @@ const GridItem = styled.div`
 function CitiesButtons({ updateCity }) {
   return (
     <GridItem>
+      <h3>City</h3>
       <button onClick={updateCity} name="paris">
         Paris
       </button>

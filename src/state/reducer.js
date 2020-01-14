@@ -2,7 +2,8 @@ export const initialState = {
   load: true,
   error: false,
   temperature: "",
-  humidity: ""
+  humidity: "",
+  pressure: ""
 };
 
 export const reducer = (state, action) => {
@@ -20,6 +21,11 @@ export const reducer = (state, action) => {
         load: false,
         error: false,
         humidity: Math.round(action.measure)
+      };
+    case "PRESSURE":
+      return {
+        ...state,
+        pressure: Math.round(action.measure)
       };
     case "FETCH_ERROR":
       return {
