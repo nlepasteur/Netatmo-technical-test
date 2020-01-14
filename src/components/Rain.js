@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useFetch } from "../customHooks/useFetch";
 // import Context from "../context";

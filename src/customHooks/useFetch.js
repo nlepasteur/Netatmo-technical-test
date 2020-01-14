@@ -1,10 +1,10 @@
 import { useEffect, useContext } from "react";
 import Context from "../context";
 import { API_TOKEN } from "../normally_from_back";
+import { UPDATE_MEASURES } from "../state/types";
 
 export const useFetch = () => {
   const { dispatch, URL } = useContext(Context);
-  // const { URL } = useContext(Context);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,14 +18,6 @@ export const useFetch = () => {
         const json = await result.json();
         console.log("json from useFetch : ", json);
 
-        const dispatchTreatedData = module => {
-          //, type
-          const total = module.reduce((acc, val) => acc + val);
-          const average = Math.round(total / module.length);
-          console.log(average);
-          // dispatch({ type, measure: average.toUpperCase() });
-        };
-
         const NAModule1_temp = [];
         const NAModule1_humidity = [];
         const NAModule1_pressure = [];
@@ -34,6 +26,15 @@ export const useFetch = () => {
         const NAModule3_rain_24h = [];
         const NAModule3_rain_60min = [];
         const NAModule3_rain_live = [];
+
+        let temperature;
+        let humidity;
+        let pressure;
+        let wind_strength;
+        let gust_strength;
+        let rain_24h;
+        let rain_60min;
+        let rain_live;
 
         json.body.forEach(obj => {
           for (let i = 0; i < obj.modules.length; i++) {
@@ -69,92 +70,56 @@ export const useFetch = () => {
               NAModule3_rain_24h.push(rain_24h);
               NAModule3_rain_60min.push(rain_60min);
               NAModule3_rain_live.push(rain_live);
-
-              // NAModule3_rain.push(rainData);
             }
           }
         });
-        console.log("NAModule1_temperature : ", NAModule1_temp);
-        console.log("NAModule1_humidity : ", NAModule1_humidity);
-        console.log(" NAModule2_wind_strength : ", NAModule2_wind_strength);
-        console.log(" NAModule3_rain_24h : ", NAModule3_rain_24h);
-        console.log(" NAModule3_rain_60min : ", NAModule3_rain_60min);
-        console.log(" NAModule3_rain_live : ", NAModule3_rain_live);
-        console.log("NAModule1_pressure : ", NAModule1_pressure);
-
-        // dispatch temperature
-        dispatchTreatedData(NAModule1_temp); // ajouter type pour dispatch en arg
-        // dispatch humidity
-        dispatchTreatedData(NAModule1_humidity); // ajouter type pour dispatch en arg
-        // dispatch pressure
-        dispatchTreatedData(NAModule1_pressure);
-        // dispatch wind
-        dispatchTreatedData(NAModule2_wind_strength); // ajouter type pour dispatch en arg
-        dispatchTreatedData(NAModule2_gust_strength); // ajouter type pour dispatch en arg
-        // dispatch rain
-        dispatchTreatedData(NAModule3_rain_24h);
-        dispatchTreatedData(NAModule3_rain_60min);
-        dispatchTreatedData(NAModule3_rain_live);
+        temperature = Math.round(
+          NAModule1_temp.reduce((acc, val) => acc + val) / NAModule1_temp.length
+        );
+        humidity = Math.round(
+          NAModule1_humidity.reduce((acc, val) => acc + val) /
+            NAModule1_humidity.length
+        );
+        pressure = Math.round(
+          NAModule1_pressure.reduce((acc, val) => acc + val) /
+            NAModule1_pressure.length
+        );
+        wind_strength = Math.round(
+          NAModule2_wind_strength.reduce((acc, val) => acc + val) /
+            NAModule2_wind_strength.length
+        );
+        gust_strength = Math.round(
+          NAModule2_gust_strength.reduce((acc, val) => acc + val) /
+            NAModule2_gust_strength.length
+        );
+        rain_24h = Math.round(
+          NAModule3_rain_24h.reduce((acc, val) => acc + val) /
+            NAModule3_rain_24h.length
+        );
+        rain_60min = Math.round(
+          NAModule3_rain_60min.reduce((acc, val) => acc + val) /
+            NAModule3_rain_60min.length
+        );
+        rain_live = Math.round(
+          NAModule3_rain_live.reduce((acc, val) => acc + val) /
+            NAModule3_rain_live.length
+        );
+        dispatch({
+          type: UPDATE_MEASURES,
+          temperature,
+          humidity,
+          pressure,
+          wind_strength,
+          gust_strength,
+          rain_24h,
+          rain_60min,
+          rain_live
+        });
       } catch (error) {
         console.error(error);
+        dispatch({ type: "FETCH_ERROR" });
       }
     };
     fetchData();
   }, [URL]);
 };
-
-// const getMeasures = (fetched, val) => {
-//   const reports = fetched.body.map(obj => {
-//     const measures = obj.measures;
-//     const [getPropNameToAccessRes] = Object.keys(measures);
-//     const res = measures[getPropNameToAccessRes].res;
-//     const [getPropNameToAccessReports] = Object.keys(res);
-//     const targetValue = res[getPropNameToAccessReports][val];
-//     return targetValue;
-//   });
-//   const total = reports.reduce((acc, val) => acc + val);
-//   const average = total / reports.length;
-
-//   dispatch({
-//     type: val === 0 ? "TEMPERATURE" : "HUMIDITY",
-//     measure: average
-//   });
-// };
-
-// const getPressure = fetched => {
-//   const reports = fetched.body.map(obj => {
-//     const measures = obj.measures;
-//     const [first, getPropNameToAccessRes] = Object.keys(measures);
-//     const res = measures[getPropNameToAccessRes].res;
-//     const [getPropNameToAccessReports] = Object.keys(res);
-//     const [targetValue] = res[getPropNameToAccessReports];
-//     return targetValue;
-//   });
-//   const total = reports.reduce((acc, val) => acc + val);
-//   const average = total / reports.length;
-//   dispatch({ type: "PRESSURE", measure: average });
-// };
-
-// useEffect(() => {
-//   const fetchData = async () => {
-//     try {
-//       const result = await fetch(url, {
-//         headers: new Headers({
-//           method: "GET",
-//           Authorization: `Bearer ${API_TOKEN}`
-//         })
-//       });
-
-//       const json = await result.json();
-//       console.log("json : ", json);
-
-//       getMeasures(json, 0);
-//       getMeasures(json, 1);
-//       getPressure(json);
-//     } catch (error) {
-//       console.error(error);
-//       dispatch({ type: "FETCH_ERROR" });
-//     }
-//   };
-//   fetchData();
-// }, [url]);
