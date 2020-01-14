@@ -2,7 +2,6 @@ import React, { useEffect, useContext } from "react";
 import styled from "styled-components";
 import Context from "../context";
 import { API_TOKEN } from "../normally_from_back";
-import { findByDisplayValue } from "@testing-library/react";
 
 const GridItem = styled.div`
   background-color: yellow;
@@ -25,9 +24,16 @@ function Rain() {
         const json = await result.json();
         console.log("json from Rain component : ", json);
 
+        const dispatchTreatedData = module => {
+          const total = module.reduce((acc, val) => acc + val);
+          const average = Math.round(total / module.length);
+          console.log(average);
+        };
+
         const NAModule1_temp = [];
         const NAModule1_humidity = [];
-        const NAModule2_wind = [];
+        const NAModule2_wind_strength = [];
+        const NAModule2_gust_strength = [];
         const NAModule3_rain = [];
 
         json.body.forEach(obj => {
@@ -43,17 +49,28 @@ function Rain() {
               NAModule1_humidity.push(humidity);
             } else if (type === "NAModule2") {
               const windData = obj.measures[module];
-              NAModule2_wind.push(windData);
+              const { gust_strength, wind_strength } = windData;
+              // NAModule2_gust_strength.push(gust_strength);
+              // NAModule2_wind_strength.push(wind_strength);
             } else if (type === "NAModule3") {
               const rainData = obj.measures[module];
+
               NAModule3_rain.push(rainData);
             }
           }
         });
         console.log("NAModule1_temperature : ", NAModule1_temp);
         console.log("NAModule1_humidity : ", NAModule1_humidity);
-        console.log(" NAModule2_wind : ", NAModule2_wind);
+        console.log(" NAModule2_wind_strength : ", NAModule2_wind_strength);
+        console.log(" NAModule2_gust_strength : ", NAModule2_gust_strength);
+
         console.log("NAModule3_rain : ", NAModule3_rain);
+
+        // dispatch temperature
+        dispatchTreatedData(NAModule1_temp);
+        // dispatch humidity
+        dispatchTreatedData(NAModule1_humidity);
+        // dispatch wind
       } catch (error) {
         console.error(error);
       }

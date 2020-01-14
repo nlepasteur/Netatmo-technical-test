@@ -28,7 +28,7 @@ export const localisation = {
 };
 
 export const API_TOKEN =
-  "5e1674428b2345000b592097|4bd58f1a8080e942bddad74d3823fe03";
+  "5e1674428b2345000b592097|3f21e2f35d74766fc5a2b13cfff1391c";
 
 // export let api = axios.create({
 //   headers: {
