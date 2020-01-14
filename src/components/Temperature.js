@@ -33,7 +33,7 @@ function Temperature() {
     URL
   } = useContext(Context);
 
-  useFetch(URL);
+  useFetch();
 
   return (
     <GridItem>
