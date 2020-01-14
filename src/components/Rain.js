@@ -34,7 +34,9 @@ function Rain() {
         const NAModule1_humidity = [];
         const NAModule2_wind_strength = [];
         const NAModule2_gust_strength = [];
-        const NAModule3_rain = [];
+        const NAModule3_rain_24h = [];
+        const NAModule3_rain_60min = [];
+        const NAModule3_rain_live = [];
 
         json.body.forEach(obj => {
           for (let i = 0; i < obj.modules.length; i++) {
@@ -56,23 +58,33 @@ function Rain() {
               }
             } else if (type === "NAModule3") {
               const rainData = obj.measures[module];
+              const { rain_24h, rain_60min, rain_live } = rainData;
+              NAModule3_rain_24h.push(rain_24h);
+              NAModule3_rain_60min.push(rain_60min);
+              NAModule3_rain_live.push(rain_live);
 
-              NAModule3_rain.push(rainData);
+              // NAModule3_rain.push(rainData);
             }
           }
         });
         console.log("NAModule1_temperature : ", NAModule1_temp);
         console.log("NAModule1_humidity : ", NAModule1_humidity);
         console.log(" NAModule2_wind_strength : ", NAModule2_wind_strength);
-        console.log(" NAModule2_gust_strength : ", NAModule2_gust_strength);
-
-        console.log("NAModule3_rain : ", NAModule3_rain);
+        console.log(" NAModule3_rain_24h : ", NAModule3_rain_24h);
+        console.log(" NAModule3_rain_60min : ", NAModule3_rain_60min);
+        console.log(" NAModule3_rain_live : ", NAModule3_rain_live);
 
         // dispatch temperature
-        dispatchTreatedData(NAModule1_temp);
+        dispatchTreatedData(NAModule1_temp); // ajouter type pour dispatch en arg
         // dispatch humidity
-        dispatchTreatedData(NAModule1_humidity);
+        dispatchTreatedData(NAModule1_humidity); // ajouter type pour dispatch en arg
         // dispatch wind
+        dispatchTreatedData(NAModule2_wind_strength); // ajouter type pour dispatch en arg
+        dispatchTreatedData(NAModule2_gust_strength); // ajouter type pour dispatch en arg
+        // dispatch rain
+        dispatchTreatedData(NAModule3_rain_24h);
+        dispatchTreatedData(NAModule3_rain_60min);
+        dispatchTreatedData(NAModule3_rain_live);
       } catch (error) {
         console.error(error);
       }
