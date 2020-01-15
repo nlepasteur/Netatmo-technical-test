@@ -36,12 +36,11 @@ export const useFetch = () => {
             const type = obj.module_types[module];
             if (type === "NAModule1") {
               const subPath = obj.measures[module].res;
-              const [subPathKey] = Object.keys(subPath); // destructure return array
+              const [subPathKey] = Object.keys(subPath);
               const subSubPath = subPath[subPathKey];
               const [temperature, humidity] = subSubPath;
               NAModule1_temp.push(temperature);
               NAModule1_humidity.push(humidity);
-              // const { pressure, module } = obj.measures;
               const keyToPressure = Object.keys(obj.measures).find(
                 item => item !== module
               );
@@ -49,8 +48,6 @@ export const useFetch = () => {
               const subSubPathToPressure = Object.keys(subPathToPressure);
               const [pressure] = subPathToPressure[subSubPathToPressure];
               NAModule1_pressure.push(pressure);
-
-              // const pressure = Object.keys(obj.measures[1])
             } else if (type === "NAModule2") {
               const windData = obj.measures[module];
               if (windData) {
@@ -84,40 +81,6 @@ export const useFetch = () => {
         rain_24h = roundMeasure(NAModule3_rain_24h);
         rain_60min = roundMeasure(NAModule3_rain_60min);
         rain_live = roundMeasure(NAModule3_rain_live);
-
-        // temp = roundMeasure(NAModule1_temp);
-        // console.log("tempppppppp testttttt : ", temp);
-        // temperature = Math.round(
-        //   NAModule1_temp.reduce((acc, val) => acc + val) / NAModule1_temp.length
-        // );
-        // humidity = Math.round(
-        //   NAModule1_humidity.reduce((acc, val) => acc + val) /
-        //     NAModule1_humidity.length
-        // );
-        // pressure = Math.round(
-        //   NAModule1_pressure.reduce((acc, val) => acc + val) /
-        //     NAModule1_pressure.length
-        // );
-        // wind_strength = Math.round(
-        //   NAModule2_wind_strength.reduce((acc, val) => acc + val) /
-        //     NAModule2_wind_strength.length
-        // );
-        // gust_strength = Math.round(
-        //   NAModule2_gust_strength.reduce((acc, val) => acc + val) /
-        //     NAModule2_gust_strength.length
-        // );
-        // rain_24h = Math.round(
-        //   NAModule3_rain_24h.reduce((acc, val) => acc + val) /
-        //     NAModule3_rain_24h.length
-        // );
-        // rain_60min = Math.round(
-        //   NAModule3_rain_60min.reduce((acc, val) => acc + val) /
-        //     NAModule3_rain_60min.length
-        // );
-        // rain_live = Math.round(
-        //   NAModule3_rain_live.reduce((acc, val) => acc + val) /
-        //     NAModule3_rain_live.length
-        // );
 
         dispatch({
           type: UPDATE_MEASURES,
