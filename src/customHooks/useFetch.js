@@ -27,31 +27,6 @@ export const useFetch = () => {
         const NAModule3_rain_60min = [];
         const NAModule3_rain_live = [];
 
-        const NAMods = [
-          {
-            module_name: "NAModule1_temp",
-            NAModule1_temp: [1, 2, 5, 4, 7, 1],
-            measure_name: "bidule",
-            bidule: 7
-          }
-        ];
-
-        (function() {
-          for (let i = 0; i < NAMods.length; i++) {
-            const module_name = NAMods[i].module_name;
-            const measures = NAMods[i][module_name];
-            const roundReducedMeasures = Math.round(
-              measures.reduce((acc, val) => acc + val)
-            );
-            const measure_name = NAMods[i].measure_name;
-            NAMods[i][measure_name] = roundReducedMeasures;
-            console.log("final result : ", NAMods[i][measure_name]);
-          }
-        })();
-        // const test = NAMods[0].measure_name;
-        // const path = NAMods[0][test];
-        // console.log(path);
-
         let temperature;
         let humidity;
         let pressure;
@@ -98,12 +73,6 @@ export const useFetch = () => {
             }
           }
         });
-
-        // const roundMeasureToAssign = () => {
-        //   for (let i = 0; i < NAModules.length; i++) {
-        //     Math.round(NAModules[i]);
-        //   }
-        // };
 
         const roundMeasure = module => {
           return Math.round(
