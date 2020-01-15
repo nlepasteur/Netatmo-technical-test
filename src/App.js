@@ -2,10 +2,24 @@ import React, { useReducer, useState } from "react";
 import Context from "./context";
 import Header from "./components/Header";
 import Wrapper from "./components/Wrapper";
+import styled from "styled-components";
 
 import { localisation } from "./normally_from_back";
 
 import { initialState, reducer } from "./state/reducer";
+
+const ToPosition = styled.div`
+  height: 80%;
+  width: 80%;
+  margin: auto;
+  margin-top: 10%;
+
+  @media (max-width: 930px) {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+  }
+`;
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -18,10 +32,10 @@ function App() {
 
   return (
     <Context.Provider value={{ state, dispatch, city, setCity, URL }}>
-      <div>
+      <ToPosition>
         <Header />
         <Wrapper />
-      </div>
+      </ToPosition>
     </Context.Provider>
   );
 }

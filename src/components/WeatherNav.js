@@ -11,12 +11,16 @@ import {
 
 const GridItem = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   text-align: center;
   align-items: stretch;
   grid-area: nav;
   border-radius: 25px;
-  border: 1px solid #a2a7ad;
+  background-color: #fe4975;
+
+  @media (max-width: 930px) {
+    border-radius: 0;
+  }
 `;
 
 const Content = styled.div`
@@ -31,11 +35,16 @@ const Content = styled.div`
   }import React from "react";
   import { Link } from "react-router-dom";
   import styled from "styled-components";
+
+  @media (max-width: 930px) {
+    margin : 0;
+    padding : 0;
+  }
   `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: #a2a7ad;
+  color: #ffffff;
 
   &:hover,
   &:visited,
@@ -46,10 +55,13 @@ const StyledLink = styled(Link)`
 
   &:focus,
   &:hover {
-    color: black;
+    color: #000000;
   }
 
-  border-right: 1px solid #a2a7ad;
+  &:last-child {
+    border: none;
+  }
+  border-right: 1px solid #6a2ed2;
 `;
 
 function WeatherNav() {

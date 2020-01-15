@@ -10,22 +10,26 @@ import styled from "styled-components";
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows : 1fr 1fr
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows : 1fr 2fr
   grid-template-areas:
-    " cities nav nav"
-    " cities data data"
-    "cities data data";
+    " cities nav nav nav"
+    " cities data data data";
   grid-gap: 1em;
-  margin-top : 1em;
+  padding : 1em;
+  background-color : #6a2ed2
+  ;
+  border-radius : 15px;
 
-  @media (max-width: 655px) {
+  @media (max-width: 930px) {
     grid-template-columns: 1fr;
     grid-template-areas:
       "nav"
       "cities"
       "data";
-    transform: translateY(0);
+      grid-gap : 0;
+      padding : 0;
+      background-color : #feb7bf;
   }
 `;
 
@@ -47,7 +51,6 @@ function Wrapper() {
       <WeatherNav />
       <CitiesButtons updateCity={updateCity} />
       <Switch>
-        {/* <Route exact path="/" component={Temperature} /> */}
         <Route path="/temperature" component={Temperature} />
         <Route path="/rain" component={Rain} />
         <Route path="/wind" component={Wind} />

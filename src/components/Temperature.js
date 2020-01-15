@@ -9,6 +9,10 @@ const GridItem = styled.div`
   > div {
     text-align: center;
   }
+
+  @media (max-width: 930px) {
+    margin-top: 1em;
+  }
 `;
 
 const Table = styled.div`
@@ -16,14 +20,19 @@ const Table = styled.div`
   grid-template-columns: repeat(3, 1fr);
   height: 100%;
   align-content: stretch;
-  border-top: 1px solid #a2a7ad;
+  border-top: 1px solid #6a2ed2;
+  background-color: #ffffff;
   > div {
     display: flex;
     height: 100%;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #a2a7ad;
-    border-left: 1px solid #a2a7ad;
+    border-bottom: 1px solid #6a2ed2;
+    border-left: 1px solid #6a2ed2;
+  }
+
+  > div:nth-child(3n) {
+    border-right: 1px solid #6a2ed2;
   }
 `;
 

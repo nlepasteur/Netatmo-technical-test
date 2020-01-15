@@ -6,37 +6,26 @@ const GridItem = styled.div`
   flex-direction: column;
   grid-area: cities;
   justify-content: center;
-  border: 1px solid grey;
+  background-color: #a2a7ad;
 
   > h3 {
-    margin: 0;
     padding: 1em 0.5em;
-    background: #a2a7ad;
+    background: #ffffff;
   }
 
   > .selected {
-    border-left: 10px solid blue;
+    background-color: #feb800;
   }
 
   > button {
     padding: 1em 0.5em;
     text-decoration: none;
-    background-color: transparent;
+    background-color: #fe4975;
     border: 0;
   }
 
-  @media (min-width: 656px) {
-    > button {
-      border-bottom: 1px solid #000000;
-    }
-
-    > button:last-child {
-      border-bottom: none;
-    }
-  }
-
-  @media (max-width: 655px) {
-    flex-direction: row;
+  @media (max-width: 930px) {
+    flex-direction: column;
   }
 `;
 

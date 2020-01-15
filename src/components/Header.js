@@ -6,10 +6,22 @@ const Head = styled.div`
   display: flex;
   justify-content: center;
   flex-flow: column;
+  margin-bottom: 1em;
   padding: 1em;
+  border-radius: 15px;
+
   text-align: center;
-  background-color: blue;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #fe4975;
+
+  > h3 {
+    color: #ff89a6;
+  }
+
+  @media (max-width: 930px) {
+    margin: 0;
+    border-radius: 0;
+  }
 `;
 
 function Header() {
