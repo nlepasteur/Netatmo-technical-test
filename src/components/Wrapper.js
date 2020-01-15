@@ -33,7 +33,7 @@ const GridContainer = styled.div`
 `;
 
 function Wrapper() {
-  const { city, setCity } = useContext(Context);
+  const { setCity } = useContext(Context);
 
   // const URL = `https://api.netatmo.com/api/getpublicdata?lat_ne=${localisation[city].lat_ne}&lon_ne=${localisation[city].lon_ne}&lat_sw=${localisation[city].lat_sw}&lon_sw=${localisation[city].lon_sw}`;
   // useFetch(URL);

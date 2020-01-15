@@ -1,7 +1,9 @@
 import { useEffect, useContext } from "react";
 import Context from "../context";
-import { API_TOKEN } from "../normally_from_back";
+// import { API_TOKEN } from "../normally_from_back";
 import { UPDATE_MEASURES } from "../state/types";
+
+import { api } from "../normally_from_back";
 
 export const useFetch = () => {
   const { dispatch, URL } = useContext(Context);
@@ -9,13 +11,14 @@ export const useFetch = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await fetch(URL, {
-          headers: new Headers({
-            method: "GET",
-            Authorization: `Bearer ${API_TOKEN}`
-          })
-        });
-        const json = await result.json();
+        const result = await api.get(URL);
+        // const result = await fetch(URL, {
+        //   headers: new Headers({
+        //     method: "GET",
+        //     Authorization: `Bearer ${API_TOKEN}`
+        //   })
+        // });
+        const json = await result.data;
         console.log("json from useFetch : ", json);
 
         const NAModule1_temp = [];
@@ -75,9 +78,11 @@ export const useFetch = () => {
         });
 
         const roundMeasure = module => {
-          return Math.round(
-            module.reduce((acc, val) => acc + val) / module.length
-          );
+          if (module.length > 1) {
+            return Math.round(
+              module.reduce((acc, val) => acc + val) / module.length
+            );
+          } else return module;
         };
 
         temperature = roundMeasure(NAModule1_temp);

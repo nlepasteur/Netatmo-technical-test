@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 
 export const localisation = {
   paris: {
@@ -28,14 +28,16 @@ export const localisation = {
 };
 
 export const API_TOKEN =
-  "5e1674428b2345000b592097|919d8e5ec95efbb38d09974007ea2726";
+  "5e1674428b2345000b592097|528550b559eda752f99db33234ef399b";
 
-// export let api = axios.create({
-//   headers: {
-//     method: "GET",
-//     Authorization: `Bearer ${API_TOKEN}`
-//   }
-// });
+export let api = axios.create({
+  headers: {
+    method: "GET",
+    Authorization: `Bearer ${API_TOKEN}`
+  }
+});
+
+// export default api;
 /* puis dans fetch sera : 
 useEffect(() => {
 

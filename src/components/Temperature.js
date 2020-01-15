@@ -29,8 +29,7 @@ const Table = styled.div`
 
 function Temperature() {
   const {
-    state: { load, error, temperature, humidity, pressure },
-    URL
+    state: { load, error, temperature, humidity, pressure }
   } = useContext(Context);
 
   useFetch();

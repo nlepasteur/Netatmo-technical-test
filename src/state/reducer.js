@@ -25,49 +25,6 @@ export const reducer = (state, action) => {
         rain_live: action.rain_live,
         load: false
       };
-    case "UPDATE_HUMIDITY":
-      return {
-        ...state,
-        humidity: action.measure,
-        load: false
-      };
-    case "UPDATE_PRESSURE":
-      return {
-        ...state,
-        pressure: action.measure,
-        load: false
-      };
-    case "UPDATE_WIND_STRENGTH":
-      return {
-        ...state,
-        wind_strength: action.measure,
-        load: false
-      };
-
-    case "UPDATE_GUST_STRENGTH":
-      return {
-        ...state,
-        gust_strength: action.measure,
-        load: false
-      };
-    case "UPDATE_RAIN_24H":
-      return {
-        ...state,
-        rain_24h: action.measure,
-        load: false
-      };
-    case "UPDATE_RAIN_60MIN":
-      return {
-        ...state,
-        rain_60min: action.measure,
-        load: false
-      };
-    case "UPDATE_RAIN_LIVE":
-      return {
-        ...state,
-        rain_live: action.measure,
-        load: false
-      };
     case "FETCH_ERROR":
       return {
         ...state,

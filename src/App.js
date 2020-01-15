@@ -13,6 +13,7 @@ function App() {
 
   const URL = `https://api.netatmo.com/api/getpublicdata?lat_ne=${localisation[city].lat_ne}&lon_ne=${localisation[city].lon_ne}&lat_sw=${localisation[city].lat_sw}&lon_sw=${localisation[city].lon_sw}`;
 
+  console.log("city : ", city);
   console.log("state : ", state);
 
   return (
