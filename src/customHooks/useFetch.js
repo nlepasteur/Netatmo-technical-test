@@ -82,7 +82,7 @@ export const useFetch = () => {
             return Math.round(
               module.reduce((acc, val) => acc + val) / module.length
             );
-          } else return module;
+          } else return Math.round(module);
         };
 
         temperature = roundMeasure(NAModule1_temp);

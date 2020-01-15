@@ -63,7 +63,6 @@ function WeatherNav() {
           <h3>Temperature</h3>
         </Content>
       </StyledLink>
-
       <StyledLink to="/rain">
         <Content>
           <div>
@@ -72,7 +71,6 @@ function WeatherNav() {
           <h3>Rain</h3>
         </Content>
       </StyledLink>
-
       <StyledLink to="/wind">
         <Content>
           <div>
