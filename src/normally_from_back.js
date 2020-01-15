@@ -28,7 +28,7 @@ export const localisation = {
 };
 
 export const API_TOKEN =
-  "5e1674428b2345000b592097|528550b559eda752f99db33234ef399b";
+  "5e1674428b2345000b592097|8f1c5067a00b77e061c5516bffc6a9cf";
 
 export let api = axios.create({
   headers: {
@@ -36,29 +36,3 @@ export let api = axios.create({
     Authorization: `Bearer ${API_TOKEN}`
   }
 });
-
-// export default api;
-/* puis dans fetch sera : 
-useEffect(() => {
-
-    const fetchData = async () => {
-
-      try {
-        const result = await api.get(url)
-        console.log("result : ", result.data.data)
-
-        const dataArray = result.data.data
-        const finalArray = dataArray.map(game => {
-          let newURL = game.box_art_url.replace('{width}', '300').replace('{height}', '300')
-          game.box_art_url = newURL
-        })
-        dispatch({ type: "FETCH_SUCCESS", dataArray })
-      } catch (error) {
-        dispatch({ type: "FETCH_ERROR" })
-      }
-    }
-
-    fetchData()
-
-  }, [])
-  */

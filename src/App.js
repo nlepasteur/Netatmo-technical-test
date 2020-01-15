@@ -21,17 +21,39 @@ const ToPosition = styled.div`
   }
 `;
 
+const storeMeasures = (state, city) => {
+  console.log(
+    "function storeMeasures called (normally log after dispatch finish log). state : ",
+    state
+  );
+  localStorage.setItem("WEATHER_STORAGE_KEY", JSON.stringify(state));
+  localStorage.setItem("CITY_STORAGE_KEY", JSON.stringify(city));
+};
+
+let initialCity = "paris";
+
+const readStoredMeasures = () => {
+  console.log("readStoredMeasures as initialState called.");
+  const storedMeasures = JSON.parse(
+    localStorage.getItem("WEATHER_STORAGE_KEY")
+  );
+  const storedCity = JSON.parse(localStorage.getItem("CITY_STORAGE_KEY"));
+
+  return storedMeasures && storedCity
+    ? { storedMeasures, storedCity }
+    : { initialState, initialCity };
+};
+
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const [city, setCity] = useState("paris");
+  const { storedMeasures, storedCity } = readStoredMeasures();
+  const [state, dispatch] = useReducer(reducer, storedMeasures);
+  const [city, setCity] = useState(storedCity);
 
   const URL = `https://api.netatmo.com/api/getpublicdata?lat_ne=${localisation[city].lat_ne}&lon_ne=${localisation[city].lon_ne}&lat_sw=${localisation[city].lat_sw}&lon_sw=${localisation[city].lon_sw}`;
-
-  console.log("city : ", city);
-  console.log("state : ", state);
-
   return (
-    <Context.Provider value={{ state, dispatch, city, setCity, URL }}>
+    <Context.Provider
+      value={{ state, dispatch, city, setCity, URL, storeMeasures }}
+    >
       <ToPosition>
         <Header />
         <Wrapper />
