@@ -3,9 +3,6 @@ import Context from "../context";
 import { UPDATE_MEASURES } from "../state/types";
 import { api } from "../normally_from_back";
 
-// custom hook useful for 2 reasons :
-// 1) separate components logic and form
-// 2) to use it inside differents components with same fetch logic, (not the case in this weather app)
 export const useFetch = () => {
   const { dispatch, URL } = useContext(Context);
 
@@ -73,7 +70,8 @@ export const useFetch = () => {
         json.body.forEach(obj => {
           // iteration to browse each module of an obj
           for (let i = 0; i < obj.modules.length; i++) {
-            // below retrieve module's code to access it
+            // below retrieve module's mac address to access it
+            // treat data differently depending on module's type which is determined inside module_types propertie, retrieved thanks to modules propertie
             const module = obj.modules[i];
             const type = obj.module_types[module];
             // below treat data differently depending on module type
@@ -82,7 +80,7 @@ export const useFetch = () => {
               const subPath = obj.measures[module].res;
               const [subPathKey] = Object.keys(subPath);
               const subSubPath = subPath[subPathKey];
-              // below destructure result to push it inside an array treated later with roundMeasure function
+              // below destructure result to push it inside an array treated later with NAMsClone
               const [temperature, humidity] = subSubPath;
               NAMs.NAModule1_temp.NAModule1_temp.push(temperature);
               NAMs.NAModule1_humidity.NAModule1_humidity.push(humidity);
@@ -124,7 +122,7 @@ export const useFetch = () => {
           const module_name = NAMsClone[i].module_name;
           const measures = NAMsClone[i][module_name];
 
-          // check array has more than 1 item to prevent error with reducer method
+          // check if array has more than 1 item to prevent error with reducer method
           if (measures.length > 0) {
             const roundReducedMeasures = Math.round(
               measures.reduce((acc, val) => acc + val) / measures.length
@@ -159,7 +157,7 @@ export const useFetch = () => {
   }, [URL]);
 
   // below it is important to use state as a dependency to update local storage with last data
-  // in case of no dependency, this useEffect would be called before above useEffect which has a asynchronous tasks, stated data would be the old one
+  // in case of no dependency, this useEffect would be called before above useEffect which has asynchronous tasks, stated data would be the old one
   useEffect(() => {
     storeMeasures(state, city);
   }, [state]);

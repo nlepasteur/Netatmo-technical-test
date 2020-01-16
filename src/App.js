@@ -29,7 +29,7 @@ const storeMeasures = (state, city) => {
 
 let initialCity = "paris";
 
-// 2) read local storage, if asked data exists return it as initial value to pass it in reducer, else return hardcoded initial value.
+// 2) read local storage, if asked data exists return it as initial value to pass it in reducer, else return hard coded initial value
 const readStoredMeasures = () => {
   const storedMeasures = JSON.parse(
     localStorage.getItem("WEATHER_STORAGE_KEY")
@@ -46,7 +46,7 @@ function App() {
   const [state, dispatch] = useReducer(reducer, storedMeasures);
   const [city, setCity] = useState(storedCity);
 
-  // this URL is updated dynamically, depending on city state
+  // this URL is updated dynamically, depending on city state, depending on this URL useFetch's useEffect are called
   const URL = `https://api.netatmo.com/api/getpublicdata?lat_ne=${localisation[city].lat_ne}&lon_ne=${localisation[city].lon_ne}&lat_sw=${localisation[city].lat_sw}&lon_sw=${localisation[city].lon_sw}`;
   return (
     // Context acts here as a global store to provide data through components, state is destructured inside components

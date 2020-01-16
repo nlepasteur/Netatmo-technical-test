@@ -3,9 +3,6 @@ import Context from "../context";
 import { UPDATE_MEASURES } from "../state/types";
 import { api } from "../normally_from_back";
 
-// custom hook useful for 2 reasons :
-// 1) separate components logic and form
-// 2) to use it inside differents components with same fetch logic, (not the case in this weather app)
 export const useFetch = () => {
   const { state, dispatch, URL, storeMeasures, city } = useContext(Context);
 
@@ -38,10 +35,10 @@ export const useFetch = () => {
         json.body.forEach(obj => {
           // iteration to browse each module of an obj
           for (let i = 0; i < obj.modules.length; i++) {
-            // below retrieve module's code to access it
+            // below retrieve module's mac address to access it
+            // treat data differently depending on module's type which is determined inside module_types propertie, retrieved thanks to modules propertie
             const module = obj.modules[i];
             const type = obj.module_types[module];
-            // below treat data differently depending on module type
             if (type === "NAModule1") {
               // below retrieve object keys to continue path
               const subPath = obj.measures[module].res;
@@ -76,7 +73,7 @@ export const useFetch = () => {
           }
         });
 
-        // this function treat data to get an average, before dispatch
+        // this function treat data to get an average, before dispatch in global store
         const roundMeasure = module => {
           // check if treated array has more than 1 item to prevent errors, was somethimes the case for Bogota
           if (module.length > 1) {
@@ -95,7 +92,7 @@ export const useFetch = () => {
         rain_60min = roundMeasure(NAModule3_rain_60min);
         rain_live = roundMeasure(NAModule3_rain_live);
 
-        // dispatch results from roundMeasure function, inside state
+        // dispatch results from roundMeasure function, inside global store
         dispatch({
           type: UPDATE_MEASURES,
           temperature,
@@ -118,8 +115,8 @@ export const useFetch = () => {
     // below URL as dependency to call useEffect each time the URL is changing
   }, [URL]);
 
-  // below it is important to use state as a dependency to update local storage with last data
-  // in case of no dependency, this useEffect would be called before above useEffect which has a asynchronous tasks, stated data would be the old one
+  // below it is important to use "state" as a dependency to update local storage with last data
+  // in case of no dependency, this useEffect would be called before above useEffect which has asynchronous tasks, stated data would be the old one
   useEffect(() => {
     storeMeasures(state, city);
   }, [state]);
