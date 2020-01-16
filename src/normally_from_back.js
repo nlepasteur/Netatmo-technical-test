@@ -1,8 +1,8 @@
-import axios from "axios"; // provide to create a header to use with axios.get
+import axios from "axios"; // allow to create a header to use with axios.get
 
 // here change token please to run this app
 export const API_TOKEN =
-  "5e1674428b2345000b592097|16a995321a670496ad3c552957ec6f07";
+  "5e1674428b2345000b592097|fa2fd29a930030d172bef89968323640";
 
 export let api = axios.create({
   headers: {

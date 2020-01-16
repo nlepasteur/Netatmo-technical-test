@@ -29,6 +29,7 @@ function Header() {
     <Head>
       <h2>Netatmo weathermap widget</h2>
       <h3>Display weather datas from big cities in the world!</h3>
+      <h2>last report : {new Date(Date.now()).toLocaleString("en-US")}</h2>
     </Head>
   );
 }
