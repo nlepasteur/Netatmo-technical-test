@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import Context from "../context";
+import React from "react";
 import styled from "styled-components";
 import { useFetch } from "../customHooks/useFetch";
 
@@ -36,36 +35,44 @@ const Table = styled.div`
   }
 `;
 
-function Temperature() {
-  const {
-    state: { load, error, temperature, humidity, pressure }
-  } = useContext(Context);
-
+function Measures(props) {
   useFetch();
-
   return (
     <GridItem>
-      {error ? (
+      {props.error ? (
         <div>
           <h3>Something went wrong</h3>
         </div>
-      ) : load ? (
+      ) : props.load ? (
         <div>
           <h3>Loading data...</h3>
         </div>
       ) : (
         <Table>
-          <div>Temperature</div>
-          <div>Humidity</div>
-          <div>Pressure</div>
+          <div>{props.measure1}</div>
+          <div>{props.measure2}</div>
+          <div>{props.measure3}</div>
 
-          <div>{temperature}°</div>
-          <div>{humidity}°</div>
-          <div>{pressure}</div>
+          <div>
+            {props.value1}
+            {props.measure1 === "Temperature"
+              ? "°C"
+              : props.measure1 === "Wind strength" && "kph"}
+          </div>
+          <div>
+            {props.value2}
+            {props.measure2 === "Humidity"
+              ? "%"
+              : props.measure2 === "Gust strength" && "kph"}
+          </div>
+          <div>
+            {props.value3}
+            {props.measure3 === "Pressure" && "mbar"}
+          </div>
         </Table>
       )}
     </GridItem>
   );
 }
 
-export default Temperature;
+export default Measures;

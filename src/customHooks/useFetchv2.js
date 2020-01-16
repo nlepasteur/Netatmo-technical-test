@@ -12,7 +12,6 @@ export const useFetch = () => {
         const result = await api.get(URL);
 
         const json = await result.data;
-        console.log("json from useFetch : ", json);
 
         const NAMs = {
           NAModule1_temp: {
@@ -120,7 +119,6 @@ export const useFetch = () => {
             const measure_name = NAMsClone[i].measure_name;
             NAMsClone[i][measure_name] = roundReducedMeasures;
           }
-          console.log("object clone de NAMs : ", NAMsClone);
         }
 
         dispatch({

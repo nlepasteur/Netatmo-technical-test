@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTemperatureHigh,
@@ -20,6 +19,10 @@ const GridItem = styled.div`
 
   @media (max-width: 930px) {
     border-radius: 0;
+  }
+
+  > .active {
+    color: green;
   }
 `;
 
@@ -42,20 +45,17 @@ const Content = styled.div`
   }
   `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(NavLink)`
   text-decoration: none;
   color: #ffffff;
 
+  &:focus,
+  &:hover,
   &:hover,
   &:visited,
   &:link,
   &:active {
     text-decoration: none;
-  }
-
-  &:focus,
-  &:hover {
-    color: #000000;
   }
 
   &:last-child {
@@ -67,7 +67,7 @@ const StyledLink = styled(Link)`
 function WeatherNav() {
   return (
     <GridItem>
-      <StyledLink to="/temperature">
+      <StyledLink to="/temperature" activeClassName="active">
         <Content>
           <div>
             <FontAwesomeIcon icon={faTemperatureHigh} />
@@ -75,7 +75,7 @@ function WeatherNav() {
           <h3>Temperature</h3>
         </Content>
       </StyledLink>
-      <StyledLink to="/rain">
+      <StyledLink to="/rain" activeClassName="active">
         <Content>
           <div>
             <FontAwesomeIcon icon={faCloudShowersHeavy} />
@@ -83,7 +83,7 @@ function WeatherNav() {
           <h3>Rain</h3>
         </Content>
       </StyledLink>
-      <StyledLink to="/wind">
+      <StyledLink to="/wind" activeClassName="active">
         <Content>
           <div>
             <FontAwesomeIcon icon={faWind} />

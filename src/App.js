@@ -1,11 +1,10 @@
 import React, { useReducer, useState } from "react";
+import styled from "styled-components";
+// below components
 import Context from "./context";
 import Header from "./components/Header";
 import Wrapper from "./components/Wrapper";
-import styled from "styled-components";
-
 import { localisation } from "./normally_from_back";
-
 import { initialState, reducer } from "./state/reducer";
 
 const ToPosition = styled.div`
@@ -22,10 +21,6 @@ const ToPosition = styled.div`
 `;
 
 const storeMeasures = (state, city) => {
-  console.log(
-    "function storeMeasures called (normally log after dispatch finish log). state : ",
-    state
-  );
   localStorage.setItem("WEATHER_STORAGE_KEY", JSON.stringify(state));
   localStorage.setItem("CITY_STORAGE_KEY", JSON.stringify(city));
 };
@@ -33,7 +28,6 @@ const storeMeasures = (state, city) => {
 let initialCity = "paris";
 
 const readStoredMeasures = () => {
-  console.log("readStoredMeasures as initialState called.");
   const storedMeasures = JSON.parse(
     localStorage.getItem("WEATHER_STORAGE_KEY")
   );

@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import { Switch, Route } from "react-router-dom";
+import styled from "styled-components";
 import Context from "../context";
-import Temperature from "./Temperature";
-import Rain from "./Rain";
-import Wind from "./Wind";
+// below components
 import CitiesButtons from "./CitiesButtons";
 import WeatherNav from "./WeatherNav";
-import styled from "styled-components";
+import Measures from "./Measures";
 
 const GridContainer = styled.div`
   display: grid;
@@ -34,7 +33,21 @@ const GridContainer = styled.div`
 `;
 
 function Wrapper() {
-  const { setCity } = useContext(Context);
+  const {
+    setCity,
+    state: {
+      load,
+      error,
+      temperature,
+      humidity,
+      pressure,
+      wind_strength,
+      gust_strength,
+      rain_24h,
+      rain_60min,
+      rain_live
+    }
+  } = useContext(Context);
 
   const updateCity = e => {
     setCity(e.target.name);
@@ -51,9 +64,49 @@ function Wrapper() {
       <WeatherNav />
       <CitiesButtons updateCity={updateCity} />
       <Switch>
-        <Route path="/temperature" component={Temperature} />
-        <Route path="/rain" component={Rain} />
-        <Route path="/wind" component={Wind} />
+        <Route
+          path="/temperature"
+          render={props => (
+            <Measures
+              load={load}
+              error={error}
+              measure1="Temperature"
+              value1={temperature}
+              measure2="Humidity"
+              value2={humidity}
+              measure3="Pressure"
+              value3={pressure}
+            />
+          )}
+        />
+        <Route
+          path="/rain"
+          render={props => (
+            <Measures
+              load={load}
+              error={error}
+              measure1="Rain live"
+              value1={rain_live}
+              measure2="Rain 60min"
+              value2={rain_60min}
+              measure3="Rain 24h"
+              value3={rain_24h}
+            />
+          )}
+        />
+        <Route
+          path="/wind"
+          render={props => (
+            <Measures
+              load={load}
+              error={error}
+              measure1="Wind strength"
+              value1={wind_strength}
+              measure2="Gust strength"
+              value2={gust_strength}
+            />
+          )}
+        />
       </Switch>
     </GridContainer>
   );

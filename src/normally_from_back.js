@@ -1,4 +1,14 @@
-import axios from "axios";
+import axios from "axios"; // permet de créer header comprenant token
+
+export const API_TOKEN =
+  "5e1674428b2345000b592097|16a995321a670496ad3c552957ec6f07";
+
+export let api = axios.create({
+  headers: {
+    method: "GET",
+    Authorization: `Bearer ${API_TOKEN}`
+  }
+});
 
 export const localisation = {
   paris: {
@@ -26,13 +36,3 @@ export const localisation = {
     lon_sw: -75.5859375
   }
 };
-
-export const API_TOKEN =
-  "5e1674428b2345000b592097|8f1c5067a00b77e061c5516bffc6a9cf";
-
-export let api = axios.create({
-  headers: {
-    method: "GET",
-    Authorization: `Bearer ${API_TOKEN}`
-  }
-});

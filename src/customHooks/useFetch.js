@@ -102,10 +102,6 @@ export const useFetch = () => {
   }, [URL]);
 
   useEffect(() => {
-    console.log(
-      "dispatch done (normally before storeMeasures called. state : ",
-      state
-    );
     storeMeasures(state, city);
   }, [state]);
 };
