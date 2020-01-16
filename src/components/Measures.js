@@ -40,6 +40,7 @@ const Table = styled.div`
 `;
 
 function Measures(props) {
+  // call useFetch inside each different measure component to update data depending on the component route and city state
   useFetch();
   return (
     <GridItem>

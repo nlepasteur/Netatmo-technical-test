@@ -30,6 +30,7 @@ const GridContainer = styled.div`
 `;
 
 function Wrapper() {
+  // destructure state from global store
   const {
     setCity,
     state: {
@@ -46,6 +47,7 @@ function Wrapper() {
     }
   } = useContext(Context);
 
+  // depending on the target's name, update city state and add or remove "selected" class
   const updateCity = e => {
     setCity(e.target.name);
     const prev = document.querySelector(".selected");
@@ -60,7 +62,9 @@ function Wrapper() {
     <GridContainer>
       <WeatherNav />
       <CitiesButtons updateCity={updateCity} />
+      {/* Switch allow to display component depending on path */}
       <Switch>
+        {/* below pass state properties depending on the component */}
         <Route
           path="/temperature"
           render={props => (

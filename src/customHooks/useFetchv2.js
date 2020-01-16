@@ -3,16 +3,21 @@ import Context from "../context";
 import { UPDATE_MEASURES } from "../state/types";
 import { api } from "../normally_from_back";
 
+// custom hook useful for 2 reasons :
+// 1) separate components logic and form
+// 2) to use it inside differents components with same fetch logic, (not the case in this weather app)
 export const useFetch = () => {
   const { dispatch, URL } = useContext(Context);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // use header created with axios
         const result = await api.get(URL);
 
         const json = await result.data;
 
+        // try to use an object instead of arrays, i would like to use Netatmo's API logic
         const NAMs = {
           NAModule1_temp: {
             module_name: "NAModule1_temp",
@@ -64,18 +69,25 @@ export const useFetch = () => {
           }
         };
 
+        // below loop through returned data from api
         json.body.forEach(obj => {
+          // iteration to browse each module of an obj
           for (let i = 0; i < obj.modules.length; i++) {
+            // below retrieve module's code to access it
             const module = obj.modules[i];
             const type = obj.module_types[module];
+            // below treat data differently depending on module type
             if (type === "NAModule1") {
+              // below retrieve object keys to continue path
               const subPath = obj.measures[module].res;
               const [subPathKey] = Object.keys(subPath);
               const subSubPath = subPath[subPathKey];
+              // below destructure result to push it inside an array treated later with roundMeasure function
               const [temperature, humidity] = subSubPath;
               NAMs.NAModule1_temp.NAModule1_temp.push(temperature);
               NAMs.NAModule1_humidity.NAModule1_humidity.push(humidity);
 
+              // below allow to retrieve pressure data, which hasn't the same type of path
               const keyToPressure = Object.keys(obj.measures).find(
                 item => item !== module
               );
@@ -106,11 +118,13 @@ export const useFetch = () => {
           }
         });
 
+        // create a clone of NAMs object as an array to iterate through and treat data before dispatch
         const NAMsClone = Object.values(NAMs);
         for (let i = 0; i < NAMsClone.length; i++) {
           const module_name = NAMsClone[i].module_name;
           const measures = NAMsClone[i][module_name];
 
+          // check array has more than 1 item to prevent error with reducer method
           if (measures.length > 0) {
             const roundReducedMeasures = Math.round(
               measures.reduce((acc, val) => acc + val) / measures.length
@@ -121,6 +135,7 @@ export const useFetch = () => {
           }
         }
 
+        // I would like to found a different way to dispatch results than with index bracket notation
         dispatch({
           type: UPDATE_MEASURES,
           temperature: NAMsClone[0].temperature,
@@ -132,11 +147,20 @@ export const useFetch = () => {
           rain_60min: NAMsClone[6].rain_60min,
           rain_live: NAMsClone[7].rain_live
         });
+        // catch "manages" rejected promises
       } catch (error) {
         console.error(error);
         dispatch({ type: "FETCH_ERROR" });
       }
     };
     fetchData();
+    // no need to prevent unmount here
+    // below URL as dependency to call useEffect each time the URL is changing
   }, [URL]);
+
+  // below it is important to use state as a dependency to update local storage with last data
+  // in case of no dependency, this useEffect would be called before above useEffect which has a asynchronous tasks, stated data would be the old one
+  useEffect(() => {
+    storeMeasures(state, city);
+  }, [state]);
 };

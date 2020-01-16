@@ -1,5 +1,6 @@
-import axios from "axios"; // permet de créer header comprenant token
+import axios from "axios"; // provide to create a header to use with axios.get
 
+// here change token please to run this app
 export const API_TOKEN =
   "5e1674428b2345000b592097|16a995321a670496ad3c552957ec6f07";
 
@@ -10,6 +11,7 @@ export let api = axios.create({
   }
 });
 
+// hardcoded data with cities localisation
 export const localisation = {
   paris: {
     lat_ne: 48.86471476180278,
