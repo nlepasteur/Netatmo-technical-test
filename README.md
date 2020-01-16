@@ -1,4 +1,4 @@
-NETATMO TECHNICAL TEST
+# NETATMO TECHNICAL TEST
 
 ## To run this app
 
@@ -8,6 +8,10 @@ Please run it on Mozilla Firefox, there are issues whit Cross-origin resource sh
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser
 
+### desktop version
+
 ![login](https://i.goopics.net/ZkVEP.png)
+
+### mobile version
 
 ![login](https://i.goopics.net/JjW7x.png)
