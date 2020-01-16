@@ -15,14 +15,17 @@ const GridItem = styled.div`
   align-items: stretch;
   grid-area: nav;
   border-radius: 25px;
-  background-color: #fe4975;
+  background-color: #e1e8ff;
+  transition : border-radius 2s;
 
   @media (max-width: 930px) {
     border-radius: 0;
+    border : none;
   }
 
   > .active {
-    color: green;
+    background-color : #8892b3
+    color: #e1e8ff;
   }
 `;
 
@@ -47,7 +50,7 @@ const Content = styled.div`
 
 const StyledLink = styled(NavLink)`
   text-decoration: none;
-  color: #ffffff;
+  color: #8892b3;
 
   &:focus,
   &:hover,
@@ -61,7 +64,7 @@ const StyledLink = styled(NavLink)`
   &:last-child {
     border: none;
   }
-  border-right: 1px solid #6a2ed2;
+  border-right: 1px solid #f0f4ff;
 `;
 
 function WeatherNav() {

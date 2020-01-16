@@ -15,10 +15,8 @@ const GridContainer = styled.div`
     " cities nav nav nav"
     " cities data data data";
   grid-gap: 1em;
-  padding : 1em;
-  background-color : #6a2ed2
+  background-color : #f0f4ff;
   ;
-  border-radius : 15px;
 
   @media (max-width: 930px) {
     grid-template-columns: 1fr;
@@ -28,7 +26,6 @@ const GridContainer = styled.div`
       "data";
       grid-gap : 0;
       padding : 0;
-      background-color : #feb7bf;
   }
 `;
 

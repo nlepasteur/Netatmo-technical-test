@@ -8,10 +8,6 @@ const GridItem = styled.div`
   > div {
     text-align: center;
   }
-
-  @media (max-width: 930px) {
-    margin-top: 1em;
-  }
 `;
 
 const Table = styled.div`
@@ -19,19 +15,27 @@ const Table = styled.div`
   grid-template-columns: repeat(3, 1fr);
   height: 100%;
   align-content: stretch;
-  border-top: 1px solid #6a2ed2;
+  border-top: 1px solid #f0f4ff;
   background-color: #ffffff;
+  color: #8892b3;
+
   > div {
     display: flex;
     height: 100%;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #6a2ed2;
-    border-left: 1px solid #6a2ed2;
+    border-bottom: 1px solid #f0f4ff;
+    border-left: 1px solid #f0f4ff;
   }
 
   > div:nth-child(3n) {
-    border-right: 1px solid #6a2ed2;
+    border-right: 1px solid #f0f4ff;
+  }
+
+  @media (max-width: 930px) {
+    div > {
+      color: red;
+    }
   }
 `;
 

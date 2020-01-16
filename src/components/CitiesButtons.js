@@ -6,21 +6,24 @@ const GridItem = styled.div`
   flex-direction: column;
   grid-area: cities;
   justify-content: center;
-  background-color: #a2a7ad;
+  background-color: #e1e8ff;
+  color: #8892b3;
 
   > h3 {
     padding: 1em 0.5em;
-    background: #ffffff;
+    background: #e1e8ff;
   }
 
   > .selected {
-    background-color: #feb800;
+    background-color: #8892b3;
+    color: #e1e8ff;
   }
 
   > button {
     padding: 1em 0.5em;
     text-decoration: none;
-    background-color: #fe4975;
+    background-color: #e1e8ff;
+    color: #8892b3;
     border: 0;
   }
 

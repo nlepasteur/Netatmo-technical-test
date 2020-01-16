@@ -11,11 +11,11 @@ const Head = styled.div`
   border-radius: 15px;
 
   text-align: center;
-  background-color: #ffffff;
-  color: #fe4975;
+  background-color: #f0f4ff;
+  color: #8892b3;
 
   > h3 {
-    color: #ff89a6;
+    color: #8892b3;
   }
 
   @media (max-width: 930px) {
