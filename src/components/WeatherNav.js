@@ -16,7 +16,6 @@ const GridItem = styled.div`
   grid-area: nav;
   border-radius: 25px;
   background-color: #e1e8ff;
-  transition : border-radius 2s;
 
   @media (max-width: 930px) {
     border-radius: 0;
@@ -38,15 +37,13 @@ const Content = styled.div`
 
   > div {
     margin-right: 0.5em;
-  }import React from "react";
-  import { Link } from "react-router-dom";
-  import styled from "styled-components";
+  }
 
   @media (max-width: 930px) {
-    margin : 0;
-    padding : 0;
+    margin: 0;
+    padding: 0;
   }
-  `;
+`;
 
 const StyledLink = styled(NavLink)`
   text-decoration: none;

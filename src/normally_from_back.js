@@ -2,7 +2,7 @@ import axios from "axios"; // allow to create an exportable header to use with a
 
 // here change token please to run this app
 export const API_TOKEN =
-  "5e1674428b2345000b592097|fa2fd29a930030d172bef89968323640";
+  "5e1674428b2345000b592097|8311f2f23c9e1a725eab05649e1f4cf9";
 
 export let api = axios.create({
   headers: {
